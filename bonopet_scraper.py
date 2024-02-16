@@ -5,13 +5,13 @@ import os
 from deep_translator import GoogleTranslator
 import utilidades
 
-site = 'https://www.bonopet.com.br/collections/todos-produtos'
-requisicao = requests.get(site)
-conteudo = requisicao.content
-conteudo_scraped = bs(conteudo, 'html.parser')
-navegacao = conteudo_scraped.find('div', attrs={'class':'pagination__nav'})
-
 def traduz_descricao_produtos():
+    site = 'https://www.bonopet.com.br/collections/todos-produtos'
+    requisicao = requests.get(site)
+    conteudo = requisicao.content
+    conteudo_scraped = bs(conteudo, 'html.parser')
+    navegacao = conteudo_scraped.find('div', attrs={'class':'pagination__nav'})
+
     for pagina in range(len(navegacao)):
         requisicao_atual = requests.get(f'https://www.bonopet.com.br/collections/todos-produtos?page={pagina + 1}')
         sleep(1)
